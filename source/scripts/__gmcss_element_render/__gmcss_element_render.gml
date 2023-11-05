@@ -59,8 +59,8 @@ function __gmcss_element_render(_element = self) {
 		if(_element.surface == undefined || !surface_exists(_element.surface)) {
 		
 			_element.surface = surface_create(
-				clamp(floor(draw_dimensions.width + border_width.left + border_width.right + 1), 1, 999999), 
-				clamp(floor(draw_dimensions.height + border_width.top + border_width.bottom + 1), 1, 999999)
+				clamp(floor(draw_dimensions.width + border_width.left + border_width.right + 1), 1, 4096), 
+				clamp(floor(draw_dimensions.height + border_width.top + border_width.bottom + 1), 1, 4096)
 			);
 		
 		// Else, ensure surface in use is the correct size
@@ -71,8 +71,8 @@ function __gmcss_element_render(_element = self) {
 			) {
 				surface_resize(
 					_element.surface, 
-					clamp(floor(draw_dimensions.width + border_width.left + border_width.right + 1), 1, 999999), 
-					clamp(floor(draw_dimensions.height + border_width.top + border_width.bottom + 1), 1, 999999)
+					clamp(floor(draw_dimensions.width + border_width.left + border_width.right + 1), 1, 4096), 
+					clamp(floor(draw_dimensions.height + border_width.top + border_width.bottom + 1), 1, 4096)
 				);
 			}
 		}

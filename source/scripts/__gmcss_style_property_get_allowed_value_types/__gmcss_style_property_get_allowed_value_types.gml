@@ -180,6 +180,13 @@ function __gmcss_style_property_get_allowed_value_types(_property) {
 				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
 			];
 		break;
+		
+		case GMCSS_STYLE_PROPERTIES.DISPLAY:
+		case GMCSS_STYLE_PROPERTIES.POSITION:
+			allowed_types = [
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRING
+			];
+		break;
 			
 	}
 	

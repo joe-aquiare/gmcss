@@ -31,6 +31,8 @@ function __gmcss_style_property_value_get_type(_value) {
 			return GMCSS_STYLE_PROPERTY_VALUE_TYPES.AUTO;
 		}
 		
+		return GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRING;
+		
 	}
 	
 	// Type is a struct

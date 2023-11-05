@@ -55,6 +55,8 @@ function __gmcss_style_property_to_string(_property) {
 		case GMCSS_STYLE_PROPERTIES.OFFSET_X:				return "offset_x";
 		case GMCSS_STYLE_PROPERTIES.OFFSET_Y:				return "offset_y";
 		case GMCSS_STYLE_PROPERTIES.CURSOR:					return "cursor";
+		case GMCSS_STYLE_PROPERTIES.DISPLAY:				return "display";
+		case GMCSS_STYLE_PROPERTIES.POSITION:				return "position";
 
 	}
 	

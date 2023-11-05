@@ -22,3 +22,23 @@
 	Value check for timing function channel names.
 */
 #macro GMCSS_VALUE_TIMING_FUNCTION_CHANNEL "value"
+
+/*
+	
+*/
+#macro GMCSS_VALUE_PROPERTY_FLEX "flex"
+
+/*
+	
+*/
+#macro GMCSS_VALUE_PROPERTY_INLINE "inline"
+
+/*
+	
+*/
+#macro GMCSS_VALUE_PROPERTY_STATIC "static"
+
+/*
+	
+*/
+#macro GMCSS_VALUE_PROPERTY_ABSOLUTE "absolute"

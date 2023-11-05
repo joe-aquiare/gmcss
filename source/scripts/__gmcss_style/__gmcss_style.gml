@@ -58,6 +58,8 @@ function __gmcss_style() constructor {
 		/* offset_x				*/	GMCSS_DEFAULT_STYLE_OFFSET,
 		/* offset_y				*/	GMCSS_DEFAULT_STYLE_OFFSET,
 		/* cursor 				*/	GMCSS_DEFAULT_STYLE_CURSOR,
+		/* display 				*/	GMCSS_DEFAULT_STYLE_DISPLAY,
+		/* position 			*/	GMCSS_DEFAULT_STYLE_POSITION,
 		
 		// TODO: add: 
 		// - align (left, center, right)
@@ -371,8 +373,8 @@ function __gmcss_style() constructor {
 			array_contains(allowed_types, GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER)	||
 			
 			// Property exceptions
-			_property == GMCSS_STYLE_PROPERTIES.BACKGROUND_COLOR							||
-			_property == GMCSS_STYLE_PROPERTIES.TEXT_COLOR							||
+			_property == GMCSS_STYLE_PROPERTIES.BACKGROUND_COLOR	||
+			_property == GMCSS_STYLE_PROPERTIES.TEXT_COLOR			||
 			_property == GMCSS_STYLE_PROPERTIES.BORDER_COLOR
 		) {
 			

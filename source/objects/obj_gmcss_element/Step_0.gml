@@ -19,14 +19,20 @@ var cumulative_offset = {
 // Go through children and assign offsets based on style properties of parent
 for(var child_index = 0; child_index < ds_list_size(children); child_index++) {
 	
+	// Set child index
+	children[| child_index].child_index = child_index;
+	
+	// Set position offsets
 	children[| child_index].parent_offset.x = 
 		x + 
+		parent_offset.x +
 		style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_LEFT) + 
 		style.get_property(GMCSS_STYLE_PROPERTIES.PADDING_LEFT) + 
 		cumulative_offset.x;
 	
 	children[| child_index].parent_offset.y = 
 		y + 
+		parent_offset.y +
 		style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_TOP) + 
 		style.get_property(GMCSS_STYLE_PROPERTIES.PADDING_TOP) + 
 		cumulative_offset.y;
@@ -37,7 +43,8 @@ for(var child_index = 0; child_index < ds_list_size(children); child_index++) {
 		// Set font for measurement
 		var prev_font = draw_get_font();
 		draw_set_font(style.get_property(GMCSS_STYLE_PROPERTIES.FONT_FAMILY));
-
+		
+		// Increment y offset for any text content
 		children[| child_index].parent_offset.y += string_height_ext(
 			text, 
 			style.__get_total_line_height(),
@@ -48,13 +55,28 @@ for(var child_index = 0; child_index < ds_list_size(children); child_index++) {
 		draw_set_font(prev_font);
 		
 	}
-
-	// Increment y for normal layout
-	cumulative_offset.y += 
-		children[| child_index].get_height_in_pixels() + 
-		children[| child_index].style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_BOTTOM);
+	
+	// Increment next child position based on display property
+	switch(style.get_property(GMCSS_STYLE_PROPERTIES.DISPLAY)) {
 		
-	// TODO: Account for flex layout
+		case GMCSS_VALUE_PROPERTY_INLINE:
+		default:
+		
+			cumulative_offset.y += 
+			children[| child_index].get_height_in_pixels() + 
+			children[| child_index].style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_BOTTOM);
+			
+		break;
+		
+		case GMCSS_VALUE_PROPERTY_FLEX:
+		
+			cumulative_offset.x += 
+				children[| child_index].get_width_in_pixels() + 
+				children[| child_index].style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_RIGHT);
+		
+		break;
+
+	}
 	
 }
 

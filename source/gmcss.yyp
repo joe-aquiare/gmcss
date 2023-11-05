@@ -61,6 +61,7 @@
     {"id":{"name":"__spr_gmcss_background_default","path":"sprites/__spr_gmcss_background_default/__spr_gmcss_background_default.yy",},},
     {"id":{"name":"__gmcss_timing_function_cubic","path":"animcurves/__gmcss_timing_function_cubic/__gmcss_timing_function_cubic.yy",},},
     {"id":{"name":"__gmcss_timing_function_bounce","path":"animcurves/__gmcss_timing_function_bounce/__gmcss_timing_function_bounce.yy",},},
+    {"id":{"name":"__gmcss_style_property_exists","path":"scripts/__gmcss_style_property_exists/__gmcss_style_property_exists.yy",},},
     {"id":{"name":"__gmcss_error","path":"scripts/__gmcss_error/__gmcss_error.yy",},},
     {"id":{"name":"__gmcss_timing_function_expo","path":"animcurves/__gmcss_timing_function_expo/__gmcss_timing_function_expo.yy",},},
     {"id":{"name":"__gmcss_style_property_value_get_type","path":"scripts/__gmcss_style_property_value_get_type/__gmcss_style_property_value_get_type.yy",},},

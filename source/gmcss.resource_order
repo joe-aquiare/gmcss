@@ -35,6 +35,7 @@
     {"name":"__gmcss_enums","order":1,"path":"scripts/__gmcss_enums/__gmcss_enums.yy",},
     {"name":"__gmcss_timing_function_cubic","order":5,"path":"animcurves/__gmcss_timing_function_cubic/__gmcss_timing_function_cubic.yy",},
     {"name":"__gmcss_timing_function_bounce","order":4,"path":"animcurves/__gmcss_timing_function_bounce/__gmcss_timing_function_bounce.yy",},
+    {"name":"__gmcss_style_property_exists","order":14,"path":"scripts/__gmcss_style_property_exists/__gmcss_style_property_exists.yy",},
     {"name":"__gmcss_error","order":10,"path":"scripts/__gmcss_error/__gmcss_error.yy",},
     {"name":"__gmcss_timing_function_expo","order":7,"path":"animcurves/__gmcss_timing_function_expo/__gmcss_timing_function_expo.yy",},
     {"name":"__gmcss_style_property_value_get_type","order":6,"path":"scripts/__gmcss_style_property_value_get_type/__gmcss_style_property_value_get_type.yy",},

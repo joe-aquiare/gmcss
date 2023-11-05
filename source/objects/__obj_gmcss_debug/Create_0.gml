@@ -62,16 +62,60 @@ test_child_element_4 = gmcss_element_create_text(
 		height: 25,
 		background_color: c_white,
 		text_color: c_black,
-		margin_bottom: 0,
 		cursor: cr_handpoint,
 	}
 );
+
+test_child_element_5 = gmcss_element_create({
+	width: "100%",
+	height: 50,
+	background_color: c_red,
+	margin_bottom: 0,
+	padding: 0,
+	display: "flex",
+});
+
+
+#region Flex elements
+
+test_flex_element_1 = gmcss_element_create({
+	width: "auto",
+	height: "100%",
+	background_color: c_yellow,
+	margin: 0,
+	margin_right: 10,
+	padding: 0,
+});
+
+test_flex_element_2 = gmcss_element_create({
+	width: "auto",
+	height: "100%",
+	background_color: c_green,
+	margin: 0,
+	margin_right: 10,
+	padding: 0,
+});
+
+test_flex_element_3 = gmcss_element_create({
+	width: "auto",
+	height: "100%",
+	background_color: c_blue,
+	margin: 0,
+	padding: 0,
+});
+
+test_child_element_5.add_child(test_flex_element_1);
+test_child_element_5.add_child(test_flex_element_2);
+test_child_element_5.add_child(test_flex_element_3);
+
+#endregion
 
 test_dom.add_child(test_child_element_title);
 test_dom.add_child(test_child_element_1);
 test_dom.add_child(test_child_element_2);
 test_dom.add_child(test_child_element_3);
 test_dom.add_child(test_child_element_4);
+test_dom.add_child(test_child_element_5);
 
 test_child_element_1.add_event(GMCSS_ELEMENT_EVENTS.MOUSE_CLICK, function() {
 	

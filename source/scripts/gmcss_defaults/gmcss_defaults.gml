@@ -136,6 +136,18 @@
 */
 #macro GMCSS_DEFAULT_STYLE_CURSOR cr_default
 
+/*
+	
+	Default: cr_default
+*/
+#macro GMCSS_DEFAULT_STYLE_DISPLAY GMCSS_VALUE_PROPERTY_INLINE
+
+/*
+	
+	Default: cr_default
+*/
+#macro GMCSS_DEFAULT_STYLE_POSITION GMCSS_VALUE_PROPERTY_STATIC
+
 #endregion
 
 #region Element values

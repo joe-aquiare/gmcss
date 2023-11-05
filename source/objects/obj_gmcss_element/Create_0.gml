@@ -15,6 +15,7 @@
 style = new __gmcss_style();	// Style struct containing all style properties of this element
 
 children			= ds_list_create();							// This element's children
+child_index			= 0;										// The index of this child in the parent's child list
 parent				= undefined;								// This element's parent
 draw_event			= GMCSS_DEFAULT_ELEMENT_DRAW_EVENT;			// The draw event for this element
 parent_offset		= { x: 0, y: 0 };							// The position offset from this element's parent

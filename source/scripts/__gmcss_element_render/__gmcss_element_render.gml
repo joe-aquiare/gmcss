@@ -13,11 +13,14 @@
 function __gmcss_element_render(_element = self) {
 	
 	#region Get properties
+	
+	// Get position offset for element
+	var offset = _element.style.get_property(GMCSS_STYLE_PROPERTIES.OFFSET);
 
 	// Get draw origin for element
 	var draw_origin = {
-		x: _element.use_application_surface ? (floor(_element.x) + floor(_element.origin.x) + floor(_element.offset.x)) : 0,
-		y: _element.use_application_surface ? (floor(_element.y) + floor(_element.origin.y) + floor(_element.offset.y)) : 0,
+		x: _element.use_application_surface ? (floor(_element.x) + floor(_element.parent_offset.x) + floor(offset.x)) : 0,
+		y: _element.use_application_surface ? (floor(_element.y) + floor(_element.parent_offset.y) + floor(offset.y)) : 0,
 	};
 	
 	// Amount to compensate the surface offset for drawn borders
@@ -86,19 +89,45 @@ function __gmcss_element_render(_element = self) {
 	
 	#region Draw background
 	
-	// Set draw properties
-	draw_set_alpha(_element.style.get_property(GMCSS_STYLE_PROPERTIES.BG_ALPHA));
-	draw_set_color(_element.style.get_property(GMCSS_STYLE_PROPERTIES.BG_COLOR));
+	var background_type = _element.style.get_property(GMCSS_STYLE_PROPERTIES.BACKGROUND);
 	
-	// Draw background rectangle
-	draw_rectangle(
-		draw_origin.x,
-		draw_origin.y,
-		draw_origin.x + draw_dimensions.width,
-		draw_origin.y + draw_dimensions.height,
-		false
-	);
+	switch(background_type) {
+		
+		case GMCSS_STYLE_BACKGROUNDS.COLOR:
+		
+			// Set draw properties
+			draw_set_alpha(_element.style.get_property(GMCSS_STYLE_PROPERTIES.BG_ALPHA));
+			draw_set_color(_element.style.get_property(GMCSS_STYLE_PROPERTIES.BACKGROUND_COLOR));
 	
+			// Draw background rectangle
+			draw_rectangle(
+				draw_origin.x,
+				draw_origin.y,
+				draw_origin.x + draw_dimensions.width - 1,
+				draw_origin.y + draw_dimensions.height - 1,
+				false
+			);
+		
+		break;
+		
+		case GMCSS_STYLE_BACKGROUNDS.IMAGE:
+		
+			// Draw background image
+			draw_sprite_stretched_ext(
+				_element.style.get_property(GMCSS_STYLE_PROPERTIES.BACKGROUND_IMAGE),
+				0,
+				draw_origin.x,
+				draw_origin.y,
+				draw_dimensions.width,
+				draw_dimensions.height,
+				c_white,
+				_element.style.get_property(GMCSS_STYLE_PROPERTIES.BG_ALPHA)
+			);
+		
+		break;
+		
+	}
+
 	#endregion
 	
 	#region Draw text
@@ -212,8 +241,8 @@ function __gmcss_element_render(_element = self) {
 	
 		draw_surface_ext(
 			_element.surface, 
-			_element.x + _element.origin.x + _element.offset.x - border_width.left - scale_offset.x, 
-			_element.y + _element.origin.y + _element.offset.y - border_width.top - scale_offset.y,
+			_element.x + _element.parent_offset.x + offset.x - border_width.left - scale_offset.x, 
+			_element.y + _element.parent_offset.y + offset.y - border_width.top - scale_offset.y,
 			scale.x,
 			scale.y,
 			0,

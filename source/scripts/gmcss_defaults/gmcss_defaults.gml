@@ -35,10 +35,22 @@
 #macro GMCSS_DEFAULT_STYLE_HEIGHT GMCSS_VALUE_PROPERTY_AUTO
 
 /*
+
+	Default: GMCSS_STYLE_BACKGROUNDS.NONE
+*/
+#macro GMCSS_DEFAULT_STYLE_BACKGROUND GMCSS_STYLE_BACKGROUNDS.NONE
+
+/*
 	Default background color for every new gmcss style struct.
 	Default: c_white
 */
 #macro GMCSS_DEFAULT_STYLE_BACKGROUND_COLOR c_white
+
+/*
+
+	Default: undefined
+*/
+#macro GMCSS_DEFAULT_STYLE_BACKGROUND_IMAGE undefined
 
 /*
 	Default text color for every new gmcss style struct.
@@ -111,6 +123,12 @@
 	Default: .5
 */
 #macro GMCSS_DEFAULT_STYLE_ORIGIN .5
+
+/*
+	
+	Default: 0
+*/
+#macro GMCSS_DEFAULT_STYLE_OFFSET 0
 
 /*
 	

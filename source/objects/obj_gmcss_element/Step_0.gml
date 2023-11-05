@@ -11,7 +11,7 @@ if(assert_child_depth) {
 #region Child origins
 
 // Initial offset from parent
-var origin_offset = {
+var cumulative_offset = {
 	x: 0,
 	y: 0
 };
@@ -19,17 +19,17 @@ var origin_offset = {
 // Go through children and assign offsets based on style properties of parent
 for(var child_index = 0; child_index < ds_list_size(children); child_index++) {
 	
-	children[| child_index].origin.x = 
+	children[| child_index].parent_offset.x = 
 		x + 
 		style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_LEFT) + 
 		style.get_property(GMCSS_STYLE_PROPERTIES.PADDING_LEFT) + 
-		origin_offset.x;
+		cumulative_offset.x;
 	
-	children[| child_index].origin.y = 
+	children[| child_index].parent_offset.y = 
 		y + 
 		style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_TOP) + 
 		style.get_property(GMCSS_STYLE_PROPERTIES.PADDING_TOP) + 
-		origin_offset.y;
+		cumulative_offset.y;
 		
 	// Increment y for text content
 	if(string_length(text) > 0) {
@@ -38,7 +38,7 @@ for(var child_index = 0; child_index < ds_list_size(children); child_index++) {
 		var prev_font = draw_get_font();
 		draw_set_font(style.get_property(GMCSS_STYLE_PROPERTIES.FONT_FAMILY));
 
-		children[| child_index].origin.y += string_height_ext(
+		children[| child_index].parent_offset.y += string_height_ext(
 			text, 
 			style.__get_total_line_height(),
 			get_width_in_pixels()
@@ -50,7 +50,7 @@ for(var child_index = 0; child_index < ds_list_size(children); child_index++) {
 	}
 
 	// Increment y for normal layout
-	origin_offset.y += 
+	cumulative_offset.y += 
 		children[| child_index].get_height_in_pixels() + 
 		children[| child_index].style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_BOTTOM);
 		
@@ -81,6 +81,18 @@ var cursor_in_bounds = point_in_rectangle(
 	element_bounds.y2
 );
 
+// Set cursor if in bounds
+if(cursor_in_bounds) {
+	
+	var cursor = style.get_property(GMCSS_STYLE_PROPERTIES.CURSOR);
+
+	if(cursor != cr_default) {
+		previous_cursor = window_get_cursor();
+		window_set_cursor(cursor);
+	}
+	
+}
+
 // Track previous hover state, get new state
 var hover_state_prev = hover_state;
 hover_state = cursor_in_bounds ? GMCSS_ELEMENT_HOVER_STATES.HOVERED : GMCSS_ELEMENT_HOVER_STATES.NOT_HOVERED;
@@ -98,14 +110,6 @@ if(hover_state == GMCSS_ELEMENT_HOVER_STATES.HOVERED && hover_state_prev == GMCS
 		
 	}
 	
-	// Store previous cursor
-	var cursor = style.get_property(GMCSS_STYLE_PROPERTIES.CURSOR);
-
-	if(cursor != cr_default) {
-		previous_cursor = window_get_cursor();
-		window_set_cursor(cursor);
-	}
-	
 }
 
 // Newly unhovered - fire mouse leave events
@@ -121,6 +125,7 @@ if(hover_state == GMCSS_ELEMENT_HOVER_STATES.NOT_HOVERED && hover_state_prev == 
 		
 	}
 	
+	// Unset cursor property
 	var cursor = style.get_property(GMCSS_STYLE_PROPERTIES.CURSOR);
 
 	if(cursor != cr_default) {

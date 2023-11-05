@@ -60,9 +60,10 @@ function __gmcss_element_get_width_in_pixels(_element = self) {
 				var child_width = _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.WIDTH);
 				
 				if(__gmcss_style_property_value_get_type(child_width) == GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER) {
-				
-					// Consider child offset
-					child_width += _element.children[|child_index].offset.x;
+					
+					// Account for offset
+					//var offset =  _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.OFFSET);
+					//child_width += offset.x;
 				
 					// Add child width and margin
 					if(__gmcss_style_property_value_get_type(child_width) == GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER) {
@@ -153,8 +154,9 @@ function __gmcss_element_get_inner_width_in_pixels(_element = self) {
 				
 				if(__gmcss_style_property_value_get_type(child_width) == GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER) {
 				
-					// Consider child offset
-					child_width += _element.children[|child_index].offset.x;
+					// Account for offset
+					//var offset =  _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.OFFSET);
+					//child_width += offset.x;
 				
 					// Add child width and margin
 					if(__gmcss_style_property_value_get_type(child_width) == GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER) {

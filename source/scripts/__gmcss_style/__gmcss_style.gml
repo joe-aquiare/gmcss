@@ -27,7 +27,9 @@ function __gmcss_style() constructor {
 		/* size					*/	undefined,
 		/* width				*/	GMCSS_DEFAULT_STYLE_WIDTH,
 		/* height				*/	GMCSS_DEFAULT_STYLE_HEIGHT,
-		/* bg_color				*/	GMCSS_DEFAULT_STYLE_BACKGROUND_COLOR,
+		/* background			*/	GMCSS_DEFAULT_STYLE_BACKGROUND,
+		/* background_color		*/	GMCSS_DEFAULT_STYLE_BACKGROUND_COLOR,
+		/* background_image		*/	GMCSS_DEFAULT_STYLE_BACKGROUND_IMAGE,
 		/* text_color			*/	GMCSS_DEFAULT_STYLE_TEXT_COLOR,
 		/* alpha				*/	GMCSS_DEFAULT_STYLE_ALPHA,
 		/* bg_alpha				*/	GMCSS_DEFAULT_STYLE_BACKGROUND_ALPHA,
@@ -52,6 +54,9 @@ function __gmcss_style() constructor {
 		/* origin				*/	undefined,
 		/* origin_x				*/	GMCSS_DEFAULT_STYLE_ORIGIN,
 		/* origin_y				*/	GMCSS_DEFAULT_STYLE_ORIGIN,
+		/* offset				*/	undefined,
+		/* offset_x				*/	GMCSS_DEFAULT_STYLE_OFFSET,
+		/* offset_y				*/	GMCSS_DEFAULT_STYLE_OFFSET,
 		/* cursor 				*/	GMCSS_DEFAULT_STYLE_CURSOR,
 		
 		// TODO: add: 
@@ -141,6 +146,13 @@ function __gmcss_style() constructor {
 
 					break;
 					
+					case GMCSS_STYLE_PROPERTIES.OFFSET:
+					
+						properties[GMCSS_STYLE_PROPERTIES.OFFSET_X] = get_property(transition_property);
+						properties[GMCSS_STYLE_PROPERTIES.OFFSET_X] = get_property(transition_property);
+
+					break;
+					
 				}
 				
 				#endregion
@@ -225,14 +237,21 @@ function __gmcss_style() constructor {
 					
 					return {
 						x:	get_property(GMCSS_STYLE_PROPERTIES.SCALE_X),
-						y: get_property(GMCSS_STYLE_PROPERTIES.SCALE_Y),
+						y:	get_property(GMCSS_STYLE_PROPERTIES.SCALE_Y),
 					};
 		
 				case GMCSS_STYLE_PROPERTIES.ORIGIN:
 					
 					return {
 						x:	get_property(GMCSS_STYLE_PROPERTIES.ORIGIN_X),
-						y: get_property(GMCSS_STYLE_PROPERTIES.ORIGIN_Y),
+						y:	get_property(GMCSS_STYLE_PROPERTIES.ORIGIN_Y),
+					};
+					
+				case GMCSS_STYLE_PROPERTIES.OFFSET:
+					
+					return {
+						x:	get_property(GMCSS_STYLE_PROPERTIES.OFFSET_X),
+						y:	get_property(GMCSS_STYLE_PROPERTIES.OFFSET_Y),
 					};
 					
 			}
@@ -252,11 +271,12 @@ function __gmcss_style() constructor {
 	
 	static transition = function(_property, _new_value, _duration = 60, _timing_function = GMCSS_STYLE_TIMING_FUNCTIONS.LINEAR) {
 		
-		#region Props not allowed
+		#region Back out on certain props
 		
 		if(_property == GMCSS_STYLE_PROPERTIES.BORDER) {
 			var property_name = __gmcss_style_property_to_string(_property);
 			__gmcss_error(__GMCSS_ERROR_PREFIX_GENERAL + $"Transitions for property \"{property_name}\" are not supported.");
+			exit;
 		}
 		
 		#endregion
@@ -271,8 +291,8 @@ function __gmcss_style() constructor {
 				transition(GMCSS_STYLE_PROPERTIES.PADDING_BOTTOM,	_new_value, _duration, _timing_function);
 				transition(GMCSS_STYLE_PROPERTIES.PADDING_LEFT,		_new_value, _duration, _timing_function);
 				transition(GMCSS_STYLE_PROPERTIES.PADDING_RIGHT,	_new_value, _duration, _timing_function);
-
-			break;
+				
+				exit;
 		
 			case GMCSS_STYLE_PROPERTIES.MARGIN:
 					
@@ -280,8 +300,8 @@ function __gmcss_style() constructor {
 				transition(GMCSS_STYLE_PROPERTIES.MARGIN_BOTTOM,	_new_value, _duration, _timing_function);
 				transition(GMCSS_STYLE_PROPERTIES.MARGIN_LEFT,		_new_value, _duration, _timing_function);
 				transition(GMCSS_STYLE_PROPERTIES.MARGIN_RIGHT,		_new_value, _duration, _timing_function);
-		
-			break;
+				
+				exit;
 
 			case GMCSS_STYLE_PROPERTIES.BORDER_WIDTH:
 						
@@ -289,8 +309,8 @@ function __gmcss_style() constructor {
 				transition(GMCSS_STYLE_PROPERTIES.BORDER_WIDTH_BOTTOM,	_new_value, _duration, _timing_function);
 				transition(GMCSS_STYLE_PROPERTIES.BORDER_WIDTH_LEFT,	_new_value, _duration, _timing_function);
 				transition(GMCSS_STYLE_PROPERTIES.BORDER_WIDTH_RIGHT,	_new_value, _duration, _timing_function);
-						
-			break;
+				
+				exit;
 		
 			case GMCSS_STYLE_PROPERTIES.SIZE:
 					
@@ -298,8 +318,6 @@ function __gmcss_style() constructor {
 				transition(GMCSS_STYLE_PROPERTIES.HEIGHT, _new_value, _duration, _timing_function);
 			
 				exit;
-
-			break;
 		
 			case GMCSS_STYLE_PROPERTIES.SCALE:
 					
@@ -307,8 +325,6 @@ function __gmcss_style() constructor {
 				transition(GMCSS_STYLE_PROPERTIES.SCALE_Y, _new_value, _duration, _timing_function);
 			
 				exit;
-						
-			break;
 		
 			case GMCSS_STYLE_PROPERTIES.ORIGIN:
 					
@@ -316,8 +332,13 @@ function __gmcss_style() constructor {
 				transition(GMCSS_STYLE_PROPERTIES.ORIGIN_Y, _new_value, _duration, _timing_function);
 			
 				exit;
-
-			break;
+				
+			case GMCSS_STYLE_PROPERTIES.OFFSET:
+					
+				transition(GMCSS_STYLE_PROPERTIES.OFFSET_X, _new_value, _duration, _timing_function);
+				transition(GMCSS_STYLE_PROPERTIES.OFFSET_Y, _new_value, _duration, _timing_function);
+			
+				exit;
 					
 		}
 				
@@ -346,7 +367,14 @@ function __gmcss_style() constructor {
 		
 		// Only allow transitions for number types
 		// TODO: Add percents
-		if(array_contains(allowed_types, GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER)) {
+		if(
+			array_contains(allowed_types, GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER)	||
+			
+			// Property exceptions
+			_property == GMCSS_STYLE_PROPERTIES.BACKGROUND_COLOR							||
+			_property == GMCSS_STYLE_PROPERTIES.TEXT_COLOR							||
+			_property == GMCSS_STYLE_PROPERTIES.BORDER_COLOR
+		) {
 			
 			// Get curve from enum
 			var timing_function_curve = GMCSS_STYLE_TIMING_FUNCTIONS.LINEAR;
@@ -369,14 +397,15 @@ function __gmcss_style() constructor {
 			ds_list_add(__transition_list, {
 				property: _property,
 				new_value: _new_value,
-				duration: _duration,
+				duration: 1 / _duration,
 				timer: 0,
 				timing_function: timing_function_curve
 			});
 			
 		} else {
 			// TODO: Add percent to error message
-			__gmcss_error(__GMCSS_ERROR_PREFIX_GENERAL + $"Cannot initiate a style transition with value \"{_new_value}\"! Only number property value types are accepted.");
+			var property_name = __gmcss_style_property_to_string(_property);
+			__gmcss_error(__GMCSS_ERROR_PREFIX_GENERAL + $"Cannot initiate a style transition for property \"{property_name}\"! Transitions are not supported for this property.");
 		}
 		
 	}
@@ -551,6 +580,27 @@ function __gmcss_style() constructor {
 			
 		}
 		
+		// Offset
+		if(_property == GMCSS_STYLE_PROPERTIES.OFFSET) {
+			
+			switch(typeof(_value)) {
+				
+				case "number":
+					__set_property_internal(GMCSS_STYLE_PROPERTIES.OFFSET_X,	_value,	_allowed_types);
+					__set_property_internal(GMCSS_STYLE_PROPERTIES.OFFSET_Y,	_value,	_allowed_types);
+				break;
+				
+				case "struct":
+					__set_property_internal(GMCSS_STYLE_PROPERTIES.OFFSET_X,	_value.x,	_allowed_types);
+					__set_property_internal(GMCSS_STYLE_PROPERTIES.OFFSET_Y,	_value.y,	_allowed_types);
+				break;
+				
+			}
+			
+			exit;
+			
+		}
+		
 		#endregion
 	
 		// Get value type
@@ -562,7 +612,7 @@ function __gmcss_style() constructor {
 		// __gmcss_error on incorrect type - only if "any" is not applied
 		if(!array_contains(_allowed_types, GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY)) {
 			if(!array_contains(_allowed_types, value_type)) {
-				__gmcss_error(__GMCSS_ERROR_PREFIX_GENERAL + $"\"{_value}\" is not a valid value for property \"{property_name}\"");
+				__gmcss_error(__GMCSS_ERROR_PREFIX_GENERAL + $"\"{string(_value)}\" is not a valid value for property \"{property_name}\"");
 			}
 		}
 		
@@ -655,12 +705,7 @@ function __gmcss_style() constructor {
 			break;
 			
 			case GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT:
-			
-				// Border rules
-				if(_property == GMCSS_STYLE_PROPERTIES.BORDER_WIDTH) {
-					
-				}
-			
+
 			break
 
 		}
@@ -669,6 +714,19 @@ function __gmcss_style() constructor {
 		
 		// Set property
 		properties[_property] = _value;
+		
+		#region Events
+		
+		// Auto-set background type
+		if(_property == GMCSS_STYLE_PROPERTIES.BACKGROUND_COLOR) {
+			set_property(GMCSS_STYLE_PROPERTIES.BACKGROUND, GMCSS_STYLE_BACKGROUNDS.COLOR);
+		}
+		
+		if(_property == GMCSS_STYLE_PROPERTIES.BACKGROUND_IMAGE) {
+			set_property(GMCSS_STYLE_PROPERTIES.BACKGROUND, GMCSS_STYLE_BACKGROUNDS.IMAGE);
+		}
+		
+		#endregion
 
 	}
 

@@ -37,6 +37,17 @@ function __gmcss_style_property_value_get_type(_value) {
 	if(typeof(_value) == "struct") {
 		return GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT;	
 	}
+	
+	// Type is sprite
+	try {
+		if(asset_get_type(sprite_get_name(_value)) == asset_sprite) {
+			
+			return GMCSS_STYLE_PROPERTY_VALUE_TYPES.SPRITE;	
+		}
+	} catch(e) {
+		// Type is unknown
+		return GMCSS_STYLE_PROPERTY_VALUE_TYPES.UNKNOWN;
+	}
 
 	// Type is unknown
 	return GMCSS_STYLE_PROPERTY_VALUE_TYPES.UNKNOWN;

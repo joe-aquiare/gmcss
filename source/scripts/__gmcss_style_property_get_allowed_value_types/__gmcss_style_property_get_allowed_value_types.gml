@@ -16,83 +16,66 @@ function __gmcss_style_property_get_allowed_value_types(_property) {
 		
 		case GMCSS_STYLE_PROPERTIES.PADDING:	
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER,
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT,
 			];
 		break;
 			
 		case GMCSS_STYLE_PROPERTIES.PADDING_TOP:	
-			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
-			];
-		break;
-			
 		case GMCSS_STYLE_PROPERTIES.PADDING_BOTTOM: 
-			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
-			];
-		break;
-			
 		case GMCSS_STYLE_PROPERTIES.PADDING_LEFT:	
-			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
-			];
-		break;
-			
 		case GMCSS_STYLE_PROPERTIES.PADDING_RIGHT:	
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER,
+			];
+		break;
+		
+		case GMCSS_STYLE_PROPERTIES.MARGIN:		
+			allowed_types = [
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER,
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT,
 			];
 		break;
 			
 		case GMCSS_STYLE_PROPERTIES.MARGIN_TOP:		
-			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
-			];
-		break;
-			
 		case GMCSS_STYLE_PROPERTIES.MARGIN_BOTTOM:	
-			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
-			];
-		break;
-			
 		case GMCSS_STYLE_PROPERTIES.MARGIN_LEFT:	
-			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
-			];
-		break;
-			
 		case GMCSS_STYLE_PROPERTIES.MARGIN_RIGHT:	
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER,
 			];
 		break;
 			
 		case GMCSS_STYLE_PROPERTIES.WIDTH:			
-			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER, 
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.PERCENT, 
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.AUTO
-			];
-		break;
-			
 		case GMCSS_STYLE_PROPERTIES.HEIGHT:			
 			allowed_types = [
 				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER, 
 				GMCSS_STYLE_PROPERTY_VALUE_TYPES.PERCENT,
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.AUTO
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.AUTO,
+			];
+		break;
+		
+		case GMCSS_STYLE_PROPERTIES.BACKGROUND:		
+			allowed_types = [
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
 			];
 		break;
 			
-		case GMCSS_STYLE_PROPERTIES.BG_COLOR:		
+		case GMCSS_STYLE_PROPERTIES.BACKGROUND_COLOR:		
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
+			];
+		break;
+		
+		case GMCSS_STYLE_PROPERTIES.BACKGROUND_IMAGE:		
+			allowed_types = [
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
 			];
 		break;
 			
 		case GMCSS_STYLE_PROPERTIES.TEXT_COLOR:		
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
 			];
 		break;
 			
@@ -119,26 +102,26 @@ function __gmcss_style_property_get_allowed_value_types(_property) {
 			
 		case GMCSS_STYLE_PROPERTIES.FONT_FAMILY:	
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
 			];
 		break;
 			
 		case GMCSS_STYLE_PROPERTIES.LINE_HEIGHT:	
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
 			];
 		break;
 		
 		case GMCSS_STYLE_PROPERTIES.BORDER:
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT,
 			];
 		break;
 
 		case GMCSS_STYLE_PROPERTIES.BORDER_WIDTH:	
 			allowed_types = [
 				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER,
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT,
 			];
 		break;
 		
@@ -153,14 +136,14 @@ function __gmcss_style_property_get_allowed_value_types(_property) {
 		
 		case GMCSS_STYLE_PROPERTIES.BORDER_COLOR:	
 			allowed_types = [
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
 			];
 		break;
 		
 		case GMCSS_STYLE_PROPERTIES.BORDER_ALPHA:	
 			allowed_types = [
 				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER,
-				GMCSS_STYLE_PROPERTY_VALUE_TYPES.PERCENT
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.PERCENT,
 			];
 		break;
 		
@@ -181,6 +164,20 @@ function __gmcss_style_property_get_allowed_value_types(_property) {
 		case GMCSS_STYLE_PROPERTIES.CURSOR:
 			allowed_types = [
 				GMCSS_STYLE_PROPERTY_VALUE_TYPES.ANY,
+			];
+		break;
+		
+		case GMCSS_STYLE_PROPERTIES.OFFSET:
+			allowed_types = [
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER,
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.STRUCT,
+			];
+		break;
+		
+		case GMCSS_STYLE_PROPERTIES.OFFSET_X:
+		case GMCSS_STYLE_PROPERTIES.OFFSET_Y:
+			allowed_types = [
+				GMCSS_STYLE_PROPERTY_VALUE_TYPES.NUMBER
 			];
 		break;
 			

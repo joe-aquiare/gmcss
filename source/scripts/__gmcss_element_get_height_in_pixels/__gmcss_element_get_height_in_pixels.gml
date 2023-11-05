@@ -57,9 +57,10 @@ function __gmcss_element_get_height_in_pixels(_element = self) {
 				cumulative_height += _element.children[|child_index].get_height_in_pixels();
 				cumulative_height += _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_TOP);
 				cumulative_height += _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_BOTTOM);
-				
+
 				// Account for offset
-				cumulative_height += _element.children[|child_index].offset.y;
+				//var offset =  _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.OFFSET);
+				//cumulative_height += max(offset.y, 0);
 				
 			}
 
@@ -144,7 +145,8 @@ function __gmcss_element_get_inner_height_in_pixels(_element = self) {
 				cumulative_height += _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.MARGIN_BOTTOM);
 				
 				// Account for offset
-				cumulative_height += _element.children[|child_index].offset.y;
+				//var offset =  _element.children[|child_index].style.get_property(GMCSS_STYLE_PROPERTIES.OFFSET);
+				//cumulative_height += max(offset.y, 0);
 				
 			}
 			

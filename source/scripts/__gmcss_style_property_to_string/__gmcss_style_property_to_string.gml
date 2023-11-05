@@ -25,7 +25,9 @@ function __gmcss_style_property_to_string(_property) {
 		case GMCSS_STYLE_PROPERTIES.SIZE:					return "size";
 		case GMCSS_STYLE_PROPERTIES.WIDTH:					return "width";
 		case GMCSS_STYLE_PROPERTIES.HEIGHT:					return "height";
-		case GMCSS_STYLE_PROPERTIES.BG_COLOR:				return "bg_color";
+		case GMCSS_STYLE_PROPERTIES.BACKGROUND:				return "background";
+		case GMCSS_STYLE_PROPERTIES.BACKGROUND_COLOR:		return "background_color";
+		case GMCSS_STYLE_PROPERTIES.BACKGROUND_IMAGE:		return "background_image";
 		case GMCSS_STYLE_PROPERTIES.TEXT_COLOR:				return "text_color";
 		case GMCSS_STYLE_PROPERTIES.ALPHA:					return "alpha";
 		case GMCSS_STYLE_PROPERTIES.BG_ALPHA:				return "bg_alpha";
@@ -49,6 +51,9 @@ function __gmcss_style_property_to_string(_property) {
 		case GMCSS_STYLE_PROPERTIES.ORIGIN:					return "origin";
 		case GMCSS_STYLE_PROPERTIES.ORIGIN_X:				return "origin_x";
 		case GMCSS_STYLE_PROPERTIES.ORIGIN_Y:				return "origin_y";
+		case GMCSS_STYLE_PROPERTIES.OFFSET:					return "offset_x";
+		case GMCSS_STYLE_PROPERTIES.OFFSET_X:				return "offset_x";
+		case GMCSS_STYLE_PROPERTIES.OFFSET_Y:				return "offset_y";
 		case GMCSS_STYLE_PROPERTIES.CURSOR:					return "cursor";
 
 	}

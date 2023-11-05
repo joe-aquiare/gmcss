@@ -14,14 +14,13 @@
 
 style = new __gmcss_style();	// Style struct containing all style properties of this element
 
-children		= ds_list_create();							// This element's children
-parent			= undefined;								// This element's parent
-draw_event		= GMCSS_DEFAULT_ELEMENT_DRAW_EVENT;			// The draw event for this element
-origin			= { x: 0, y: 0 };							// The draw origin of this element
-offset			= { x: 0, y: 0 };							// Offset from the draw origin of this element
-text			= "";										// Text for this element to render
-surface			= undefined;								// The surface for drawing this element
-hover_state		= GMCSS_ELEMENT_HOVER_STATES.NOT_HOVERED	// The current hover state of the element
+children			= ds_list_create();							// This element's children
+parent				= undefined;								// This element's parent
+draw_event			= GMCSS_DEFAULT_ELEMENT_DRAW_EVENT;			// The draw event for this element
+parent_offset		= { x: 0, y: 0 };							// The position offset from this element's parent
+text				= "";										// Text for this element to render
+surface				= undefined;								// The surface for drawing this element
+hover_state			= GMCSS_ELEMENT_HOVER_STATES.NOT_HOVERED	// The current hover state of the element
 
 #endregion
  
